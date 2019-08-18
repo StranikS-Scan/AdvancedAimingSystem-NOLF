@@ -17,8 +17,8 @@ p_inject_stage_main = XModLib.HookUtils.HookChain()
 # -------------------------------- #
 #    Hooks injection main stage    #
 # -------------------------------- #
-@XModLib.HookUtils.staticMethodHookExt(g_inject_loads, gui.shared.personality, 'start', invoke=XModLib.HookUtils.HookInvoke.PRIMARY)
-def new_Personality_start(*args, **kwargs):
+@XModLib.HookUtils.methodHookExt(g_inject_loads, gameplay.delegator.GameplayLogic, 'start', invoke=XModLib.HookUtils.HookInvoke.PRIMARY)
+def new_GameplayLogic_start(*args, **kwargs):
 	g_inject_stage_main()
 	p_inject_stage_main()
 	return

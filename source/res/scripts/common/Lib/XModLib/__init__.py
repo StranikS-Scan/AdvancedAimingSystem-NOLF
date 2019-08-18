@@ -2,7 +2,7 @@ __application__ = ('X-Mod Library', 'XModLib', 'GPCracker.XModLib')
 __official_topic__ = None
 __authors__ = ('GPCracker', )
 __version__ = ('v0.1.18', None)
-__client__ = (('ru', ), '1.0.0.1')
+__client__ = (('ru', ), '1.5.1.1')
 
 # ---------------------- #
 #    Application info    #

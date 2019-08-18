@@ -4,7 +4,7 @@ __authors__ = ('GPCracker', )
 __bugfixes__ = ('Tempora', )
 __version__ = ('v0.2.18', None)
 __xmodlib__ = ('v0.1.18', None)
-__client__ = (('ru', ), '1.0.0.1')
+__client__ = (('ru', ), '1.5.1.1')
 
 # ---------------------- #
 #    Application info    #
@@ -84,6 +84,7 @@ import AvatarInputHandler.AimingSystems.StrategicAimingSystem
 # -------------------------- #
 import gui.Scaleform.battle_entry
 import gui.Scaleform.daapi.view.battle.shared
+import gameplay.delegator
 
 # ------------------- #
 #    X-Mod Library    #
@@ -1447,8 +1448,8 @@ p_inject_stage_main = XModLib.HookUtils.HookChain()
 # -------------------------------- #
 #    Hooks injection main stage    #
 # -------------------------------- #
-@XModLib.HookUtils.staticMethodHookExt(g_inject_loads, gui.shared.personality, 'start', invoke=XModLib.HookUtils.HookInvoke.PRIMARY)
-def new_Personality_start(*args, **kwargs):
+@XModLib.HookUtils.methodHookExt(g_inject_loads, gameplay.delegator.GameplayLogic, 'start', invoke=XModLib.HookUtils.HookInvoke.PRIMARY)
+def new_GameplayLogic_start(*args, **kwargs):
 	g_inject_stage_main()
 	p_inject_stage_main()
 	return
@@ -1842,7 +1843,7 @@ def new_VehicleGunRotator_getGunMarkerPosition(self, shotPoint, shotVector, disp
 	def colliderMaterial(collisionTestStart, collisionTestStop):
 		return ProjectileMover.collideDynamicAndStatic(collisionTestStart, collisionTestStop, (self.getAttachedVehicleID(), ))
 	def colliderSpace(collisionTestStart, collisionTestStop):
-		result = self._VehicleGunRotator__avatar.arena.collideWithSpaceBB(collisionTestStart, collisionTestStop)
+		_, result = self._VehicleGunRotator__avatar.arena.collideWithSpaceBB(collisionTestStart, collisionTestStop)
 		return (result, ) if result is not None else None
 	colliders = (colliderCorrection, colliderMaterial, colliderSpace)
 	vehicleTypeDescriptor = self._VehicleGunRotator__avatar.getVehicleDescriptor()

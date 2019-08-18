@@ -4,7 +4,7 @@ __authors__ = ('GPCracker', )
 __bugfixes__ = ('Tempora', )
 __version__ = ('v0.2.18', None)
 __xmodlib__ = ('v0.1.18', None)
-__client__ = (('ru', ), '1.0.0.1')
+__client__ = (('ru', ), '1.5.1.1')
 
 # ---------------------- #
 #    Application info    #

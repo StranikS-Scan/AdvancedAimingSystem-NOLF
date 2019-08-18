@@ -67,7 +67,7 @@ def new_VehicleGunRotator_getGunMarkerPosition(self, shotPoint, shotVector, disp
 	def colliderMaterial(collisionTestStart, collisionTestStop):
 		return ProjectileMover.collideDynamicAndStatic(collisionTestStart, collisionTestStop, (self.getAttachedVehicleID(), ))
 	def colliderSpace(collisionTestStart, collisionTestStop):
-		result = self._VehicleGunRotator__avatar.arena.collideWithSpaceBB(collisionTestStart, collisionTestStop)
+		_, result = self._VehicleGunRotator__avatar.arena.collideWithSpaceBB(collisionTestStart, collisionTestStop)
 		return (result, ) if result is not None else None
 	colliders = (colliderCorrection, colliderMaterial, colliderSpace)
 	vehicleTypeDescriptor = self._VehicleGunRotator__avatar.getVehicleDescriptor()

@@ -14,9 +14,9 @@ import BigWorld
 #    WoT Client    #
 # ---------------- #
 import constants
-import gui.app_loader
 import gui.SystemMessages
 import gui.shared.notifications
+import gui.shared.personality
 import gui.Scaleform.framework.ViewTypes
 import gui.Scaleform.daapi.view.battle.shared.messages.fading_messages
 import notification.settings
@@ -46,7 +46,7 @@ def getBattleChatControllers():
 	)
 
 def showMessageOnPanel(msgType, msgKey, msgText, msgColor):
-	battleApp = gui.app_loader.g_appLoader.getDefBattleApp()
+	battleApp = gui.shared.personality.ServicesLocator.appLoader.getDefBattleApp()
 	if battleApp is not None and msgType in ['Vehicle', 'VehicleError', 'Player']:
 		battlePage = battleApp.containerManager.getContainer(gui.Scaleform.framework.ViewTypes.VIEW).getView()
 		messageMethods = gui.Scaleform.daapi.view.battle.shared.messages.fading_messages._COLOR_TO_METHOD

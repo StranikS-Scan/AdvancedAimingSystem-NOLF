@@ -53,6 +53,7 @@ import AvatarInputHandler.AimingSystems.StrategicAimingSystem
 # -------------------------- #
 import gui.Scaleform.battle_entry
 import gui.Scaleform.daapi.view.battle.shared
+import gameplay.delegator
 
 # ------------------- #
 #    X-Mod Library    #
