@@ -11,7 +11,7 @@ import BigWorld
 # ---------------- #
 #    WoT Client    #
 # ---------------- #
-import AvatarInputHandler.aih_constants
+import aih_constants
 
 # ---------------------- #
 #    WoT Client Hooks    #
@@ -95,9 +95,9 @@ if g_config['applicationEnabled'] and g_config['plugins']['safeShot']['enabled']
 @XModLib.HookUtils.methodHookExt(p_inject_hooks, AvatarInputHandler.control_modes._GunControlMode, 'updateGunMarker')
 def new_GunControlMode_updateGunMarker(self, markerType, pos, dir, size, relaxTime, collData):
 	gunTarget = collData.entity if collData is not None else None
-	if markerType == AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.CLIENT:
+	if markerType == aih_constants.GUN_MARKER_TYPE.CLIENT:
 		self._clientTarget = gunTarget
-	elif markerType == AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.SERVER:
+	elif markerType == aih_constants.GUN_MARKER_TYPE.SERVER:
 		self._serverTarget = gunTarget
 	return
 
@@ -152,7 +152,7 @@ def new_SafeShotControlMode_handleKeyEvent(self, isDown, key, mods, event=None):
 def new_PlayerAvatar_shoot(old_PlayerAvatar_shoot, self, *args, **kwargs):
 	config = g_config['plugins']['safeShot']
 	def isIgnoredCtrlMode(ctrlModeName):
-		return ctrlModeName not in (AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE, AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER)
+		return ctrlModeName not in (aih_constants.CTRL_MODE_NAME.ARCADE, aih_constants.CTRL_MODE_NAME.SNIPER)
 	if not config['enabled'] or not config['activated'] or isIgnoredCtrlMode(self.inputHandler.ctrlModeName):
 		return old_PlayerAvatar_shoot(self, *args, **kwargs)
 	gunTargetClient = getattr(self.inputHandler.ctrl, '_clientTarget', None)
@@ -169,7 +169,7 @@ def new_PlayerAvatar_shoot(old_PlayerAvatar_shoot, self, *args, **kwargs):
 	def isFreshFrag(vehicle):
 		return not vehicle.isAlive() and getattr(vehicle, '_deathTime', BigWorld.time()) + config['fragExpirationTimeout'] >= BigWorld.time()
 	def isWasteCtrlMode(ctrlModeName):
-		return ctrlModeName in (AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE, )
+		return ctrlModeName in (aih_constants.CTRL_MODE_NAME.ARCADE, )
 	reason, target = None, None
 	if config['reasons']['waste']['enabled'] and gunTarget is None and isWasteCtrlMode(self.inputHandler.ctrlModeName):
 		reason, target = 'waste', gunTarget

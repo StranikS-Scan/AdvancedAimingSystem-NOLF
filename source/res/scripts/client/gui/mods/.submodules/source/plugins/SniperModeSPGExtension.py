@@ -11,7 +11,7 @@ import BigWorld
 # ---------------- #
 #    WoT Client    #
 # ---------------- #
-import AvatarInputHandler.aih_constants
+import aih_constants
 
 # ---------------------- #
 #    WoT Client Hooks    #
@@ -62,13 +62,13 @@ def new_ControlMarkersFactory_createSPGMarkers(old_ControlMarkersFactory_createS
 	result = old_ControlMarkersFactory_createSPGMarkers(self, markersInfo, components=components)
 	if markersInfo.isServerMarkerActivated:
 		dataProvider = markersInfo.serverMarkerDataProvider
-		markerType = AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.SERVER
+		markerType = aih_constants.GUN_MARKER_TYPE.SERVER
 	elif markersInfo.isClientMarkerActivated:
 		dataProvider = markersInfo.clientMarkerDataProvider
-		markerType = AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.CLIENT
+		markerType = aih_constants.GUN_MARKER_TYPE.CLIENT
 	else:
 		dataProvider = None
-		markerType = AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.UNDEFINED
+		markerType = aih_constants.GUN_MARKER_TYPE.UNDEFINED
 	return result + (self._createSniperMarker(markerType, dataProvider, components=components), )
 
 # ----------------------------- #
@@ -80,7 +80,7 @@ def new_ArcadeControlMode_activateAlternateMode(self, pos=None, bByScroll=False)
 		if not BigWorld.player().isGunLocked and not BigWorld.player().isOwnBarrelUnderWater:
 			if self._aih.isSPG and bByScroll:
 				self._aih.onControlModeChanged(
-					AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER,
+					aih_constants.CTRL_MODE_NAME.SNIPER,
 					preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
 					aimingMode=self.aimingMode,
 					saveZoom=False,
@@ -104,7 +104,7 @@ def new_ArcadeControlMode_handleKeyEvent(old_ArcadeControlMode_handleKeyEvent, s
 			if shortcutHandle and (not shortcutHandle.switch or shortcutHandle.pushed):
 				if not BigWorld.player().isGunLocked and not BigWorld.player().isOwnBarrelUnderWater:
 					self._aih.onControlModeChanged(
-						AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER,
+						aih_constants.CTRL_MODE_NAME.SNIPER,
 						preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
 						aimingMode=self.aimingMode,
 						saveZoom=True,
@@ -131,7 +131,7 @@ def new_SniperControlMode_handleKeyEvent(old_SniperControlMode_handleKeyEvent, s
 			if shortcutHandle and (not shortcutHandle.switch or shortcutHandle.pushed):
 				if not BigWorld.player().isGunLocked and not BigWorld.player().isOwnBarrelUnderWater:
 					self._aih.onControlModeChanged(
-						AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE,
+						aih_constants.CTRL_MODE_NAME.ARCADE,
 						preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
 						turretYaw=self.camera.aimingSystem.turretYaw,
 						gunPitch=self.camera.aimingSystem.gunPitch,

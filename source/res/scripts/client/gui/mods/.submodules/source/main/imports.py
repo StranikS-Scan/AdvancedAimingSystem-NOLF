@@ -24,9 +24,9 @@ import BigWorld
 #    WoT Client    #
 # ---------------- #
 import constants
+import aih_constants
 import gui.shared.personality
 import AvatarInputHandler.cameras
-import AvatarInputHandler.aih_constants
 import AvatarInputHandler.aih_global_binding
 
 # -------------------- #

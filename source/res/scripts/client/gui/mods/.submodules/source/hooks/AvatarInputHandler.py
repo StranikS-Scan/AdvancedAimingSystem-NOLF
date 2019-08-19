@@ -51,10 +51,10 @@ def new_AvatarInputHandler_handleKeyEvent(old_AvatarInputHandler_handleKeyEvent,
 	kbevent = XModLib.KeyboardUtils.KeyboardEvent(event)
 	## Operating control modes
 	operatingControlModes = (
-		AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE,
-		AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER,
-		AvatarInputHandler.aih_constants.CTRL_MODE_NAME.STRATEGIC,
-		AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARTY
+		aih_constants.CTRL_MODE_NAME.ARCADE,
+		aih_constants.CTRL_MODE_NAME.SNIPER,
+		aih_constants.CTRL_MODE_NAME.STRATEGIC,
+		aih_constants.CTRL_MODE_NAME.ARTY
 	)
 	## AvatarInputHandler started, control mode supported, event not handled by game (for AvatarInputHandler switches)
 	if self._AvatarInputHandler__isStarted and self.ctrlModeName in operatingControlModes and not result:

@@ -217,13 +217,13 @@ class GuiBattleBusinessHandler(GuiBaseBusinessHandler):
 
 	def _handleAvatarCtrlModeEvent(self, event):
 		ctrlMode = event.ctx['ctrlMode']
-		if ctrlMode == AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE:
+		if ctrlMode == aih_constants.CTRL_MODE_NAME.ARCADE:
 			ctrlModeName = 'arcade'
-		elif ctrlMode == AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER:
+		elif ctrlMode == aih_constants.CTRL_MODE_NAME.SNIPER:
 			ctrlModeName = 'sniper'
-		elif ctrlMode == AvatarInputHandler.aih_constants.CTRL_MODE_NAME.STRATEGIC:
+		elif ctrlMode == aih_constants.CTRL_MODE_NAME.STRATEGIC:
 			ctrlModeName = 'strategic'
-		elif ctrlMode == AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARTY:
+		elif ctrlMode == aih_constants.CTRL_MODE_NAME.ARTY:
 			ctrlModeName = 'arty'
 		else:
 			ctrlModeName = 'default'

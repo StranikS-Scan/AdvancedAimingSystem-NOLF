@@ -8,7 +8,7 @@
 def new_OperatingControlMode_init(self, *args, **kwargs):
 	# These strict type checks ensure hooks will work only in original classes themselves, but not in their subclasses.
 	if type(self) is AvatarInputHandler.control_modes.ArcadeControlMode:
-		config = g_config['modules']['aimCorrection'][AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE]
+		config = g_config['modules']['aimCorrection'][aih_constants.CTRL_MODE_NAME.ARCADE]
 		self.XAimCorrection = ArcadeAimCorrection(
 			self,
 			fixGunMarker=config['fixGunMarker'],
@@ -18,7 +18,7 @@ def new_OperatingControlMode_init(self, *args, **kwargs):
 			maxDistance=config['targetMode']['distance'][1]
 		) if config['enabled'] else None
 	elif type(self) is AvatarInputHandler.control_modes.SniperControlMode:
-		config = g_config['modules']['aimCorrection'][AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER]
+		config = g_config['modules']['aimCorrection'][aih_constants.CTRL_MODE_NAME.SNIPER]
 		self.XAimCorrection = SniperAimCorrection(
 			self,
 			fixGunMarker=config['fixGunMarker'],
@@ -28,7 +28,7 @@ def new_OperatingControlMode_init(self, *args, **kwargs):
 			maxDistance=config['targetMode']['distance'][1]
 		) if config['enabled'] else None
 	elif type(self) is AvatarInputHandler.control_modes.StrategicControlMode:
-		config = g_config['modules']['aimCorrection'][AvatarInputHandler.aih_constants.CTRL_MODE_NAME.STRATEGIC]
+		config = g_config['modules']['aimCorrection'][aih_constants.CTRL_MODE_NAME.STRATEGIC]
 		self.XAimCorrection = StrategicAimCorrection(
 			self,
 			fixGunMarker=config['fixGunMarker'],
@@ -38,7 +38,7 @@ def new_OperatingControlMode_init(self, *args, **kwargs):
 			heightMultiplier=config['targetMode']['heightMultiplier']
 		) if config['enabled'] else None
 	elif type(self) is AvatarInputHandler.control_modes.ArtyControlMode:
-		config = g_config['modules']['aimCorrection'][AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARTY]
+		config = g_config['modules']['aimCorrection'][aih_constants.CTRL_MODE_NAME.ARTY]
 		self.XAimCorrection = ArtyAimCorrection(
 			self,
 			fixGunMarker=config['fixGunMarker'],

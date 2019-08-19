@@ -4,7 +4,7 @@ __authors__ = ('GPCracker', )
 __bugfixes__ = ('Tempora', )
 __version__ = ('v0.2.18', None)
 __xmodlib__ = ('v0.1.18', None)
-__client__ = (('ru', ), '1.5.1.1')
+__client__ = (('ru', ), '1.6.0.0')
 
 # ---------------------- #
 #    Application info    #
@@ -55,9 +55,9 @@ import BigWorld
 #    WoT Client    #
 # ---------------- #
 import constants
+import aih_constants
 import gui.shared.personality
 import AvatarInputHandler.cameras
-import AvatarInputHandler.aih_constants
 import AvatarInputHandler.aih_global_binding
 
 # -------------------- #
@@ -1299,13 +1299,13 @@ class GuiBattleBusinessHandler(GuiBaseBusinessHandler):
 
 	def _handleAvatarCtrlModeEvent(self, event):
 		ctrlMode = event.ctx['ctrlMode']
-		if ctrlMode == AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE:
+		if ctrlMode == aih_constants.CTRL_MODE_NAME.ARCADE:
 			ctrlModeName = 'arcade'
-		elif ctrlMode == AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER:
+		elif ctrlMode == aih_constants.CTRL_MODE_NAME.SNIPER:
 			ctrlModeName = 'sniper'
-		elif ctrlMode == AvatarInputHandler.aih_constants.CTRL_MODE_NAME.STRATEGIC:
+		elif ctrlMode == aih_constants.CTRL_MODE_NAME.STRATEGIC:
 			ctrlModeName = 'strategic'
-		elif ctrlMode == AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARTY:
+		elif ctrlMode == aih_constants.CTRL_MODE_NAME.ARTY:
 			ctrlModeName = 'arty'
 		else:
 			ctrlModeName = 'default'
@@ -1594,10 +1594,10 @@ def new_AvatarInputHandler_handleKeyEvent(old_AvatarInputHandler_handleKeyEvent,
 	kbevent = XModLib.KeyboardUtils.KeyboardEvent(event)
 	## Operating control modes
 	operatingControlModes = (
-		AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE,
-		AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER,
-		AvatarInputHandler.aih_constants.CTRL_MODE_NAME.STRATEGIC,
-		AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARTY
+		aih_constants.CTRL_MODE_NAME.ARCADE,
+		aih_constants.CTRL_MODE_NAME.SNIPER,
+		aih_constants.CTRL_MODE_NAME.STRATEGIC,
+		aih_constants.CTRL_MODE_NAME.ARTY
 	)
 	## AvatarInputHandler started, control mode supported, event not handled by game (for AvatarInputHandler switches)
 	if self._AvatarInputHandler__isStarted and self.ctrlModeName in operatingControlModes and not result:
@@ -1687,7 +1687,7 @@ def new_AvatarInputHandler_handleKeyEvent(old_AvatarInputHandler_handleKeyEvent,
 def new_OperatingControlMode_init(self, *args, **kwargs):
 	# These strict type checks ensure hooks will work only in original classes themselves, but not in their subclasses.
 	if type(self) is AvatarInputHandler.control_modes.ArcadeControlMode:
-		config = g_config['modules']['aimCorrection'][AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE]
+		config = g_config['modules']['aimCorrection'][aih_constants.CTRL_MODE_NAME.ARCADE]
 		self.XAimCorrection = ArcadeAimCorrection(
 			self,
 			fixGunMarker=config['fixGunMarker'],
@@ -1697,7 +1697,7 @@ def new_OperatingControlMode_init(self, *args, **kwargs):
 			maxDistance=config['targetMode']['distance'][1]
 		) if config['enabled'] else None
 	elif type(self) is AvatarInputHandler.control_modes.SniperControlMode:
-		config = g_config['modules']['aimCorrection'][AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER]
+		config = g_config['modules']['aimCorrection'][aih_constants.CTRL_MODE_NAME.SNIPER]
 		self.XAimCorrection = SniperAimCorrection(
 			self,
 			fixGunMarker=config['fixGunMarker'],
@@ -1707,7 +1707,7 @@ def new_OperatingControlMode_init(self, *args, **kwargs):
 			maxDistance=config['targetMode']['distance'][1]
 		) if config['enabled'] else None
 	elif type(self) is AvatarInputHandler.control_modes.StrategicControlMode:
-		config = g_config['modules']['aimCorrection'][AvatarInputHandler.aih_constants.CTRL_MODE_NAME.STRATEGIC]
+		config = g_config['modules']['aimCorrection'][aih_constants.CTRL_MODE_NAME.STRATEGIC]
 		self.XAimCorrection = StrategicAimCorrection(
 			self,
 			fixGunMarker=config['fixGunMarker'],
@@ -1717,7 +1717,7 @@ def new_OperatingControlMode_init(self, *args, **kwargs):
 			heightMultiplier=config['targetMode']['heightMultiplier']
 		) if config['enabled'] else None
 	elif type(self) is AvatarInputHandler.control_modes.ArtyControlMode:
-		config = g_config['modules']['aimCorrection'][AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARTY]
+		config = g_config['modules']['aimCorrection'][aih_constants.CTRL_MODE_NAME.ARTY]
 		self.XAimCorrection = ArtyAimCorrection(
 			self,
 			fixGunMarker=config['fixGunMarker'],
@@ -1874,7 +1874,7 @@ import BigWorld
 # ---------------- #
 #    WoT Client    #
 # ---------------- #
-import AvatarInputHandler.aih_constants
+import aih_constants
 
 # ---------------------- #
 #    WoT Client Hooks    #
@@ -1958,9 +1958,9 @@ if g_config['applicationEnabled'] and g_config['plugins']['safeShot']['enabled']
 @XModLib.HookUtils.methodHookExt(p_inject_hooks, AvatarInputHandler.control_modes._GunControlMode, 'updateGunMarker')
 def new_GunControlMode_updateGunMarker(self, markerType, pos, dir, size, relaxTime, collData):
 	gunTarget = collData.entity if collData is not None else None
-	if markerType == AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.CLIENT:
+	if markerType == aih_constants.GUN_MARKER_TYPE.CLIENT:
 		self._clientTarget = gunTarget
-	elif markerType == AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.SERVER:
+	elif markerType == aih_constants.GUN_MARKER_TYPE.SERVER:
 		self._serverTarget = gunTarget
 	return
 
@@ -2015,7 +2015,7 @@ def new_SafeShotControlMode_handleKeyEvent(self, isDown, key, mods, event=None):
 def new_PlayerAvatar_shoot(old_PlayerAvatar_shoot, self, *args, **kwargs):
 	config = g_config['plugins']['safeShot']
 	def isIgnoredCtrlMode(ctrlModeName):
-		return ctrlModeName not in (AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE, AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER)
+		return ctrlModeName not in (aih_constants.CTRL_MODE_NAME.ARCADE, aih_constants.CTRL_MODE_NAME.SNIPER)
 	if not config['enabled'] or not config['activated'] or isIgnoredCtrlMode(self.inputHandler.ctrlModeName):
 		return old_PlayerAvatar_shoot(self, *args, **kwargs)
 	gunTargetClient = getattr(self.inputHandler.ctrl, '_clientTarget', None)
@@ -2032,7 +2032,7 @@ def new_PlayerAvatar_shoot(old_PlayerAvatar_shoot, self, *args, **kwargs):
 	def isFreshFrag(vehicle):
 		return not vehicle.isAlive() and getattr(vehicle, '_deathTime', BigWorld.time()) + config['fragExpirationTimeout'] >= BigWorld.time()
 	def isWasteCtrlMode(ctrlModeName):
-		return ctrlModeName in (AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE, )
+		return ctrlModeName in (aih_constants.CTRL_MODE_NAME.ARCADE, )
 	reason, target = None, None
 	if config['reasons']['waste']['enabled'] and gunTarget is None and isWasteCtrlMode(self.inputHandler.ctrlModeName):
 		reason, target = 'waste', gunTarget
@@ -2543,7 +2543,7 @@ import BigWorld
 # ---------------- #
 #    WoT Client    #
 # ---------------- #
-import AvatarInputHandler.aih_constants
+import aih_constants
 
 # ---------------------- #
 #    WoT Client Hooks    #
@@ -2594,13 +2594,13 @@ def new_ControlMarkersFactory_createSPGMarkers(old_ControlMarkersFactory_createS
 	result = old_ControlMarkersFactory_createSPGMarkers(self, markersInfo, components=components)
 	if markersInfo.isServerMarkerActivated:
 		dataProvider = markersInfo.serverMarkerDataProvider
-		markerType = AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.SERVER
+		markerType = aih_constants.GUN_MARKER_TYPE.SERVER
 	elif markersInfo.isClientMarkerActivated:
 		dataProvider = markersInfo.clientMarkerDataProvider
-		markerType = AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.CLIENT
+		markerType = aih_constants.GUN_MARKER_TYPE.CLIENT
 	else:
 		dataProvider = None
-		markerType = AvatarInputHandler.aih_constants.GUN_MARKER_TYPE.UNDEFINED
+		markerType = aih_constants.GUN_MARKER_TYPE.UNDEFINED
 	return result + (self._createSniperMarker(markerType, dataProvider, components=components), )
 
 # ----------------------------- #
@@ -2612,7 +2612,7 @@ def new_ArcadeControlMode_activateAlternateMode(self, pos=None, bByScroll=False)
 		if not BigWorld.player().isGunLocked and not BigWorld.player().isOwnBarrelUnderWater:
 			if self._aih.isSPG and bByScroll:
 				self._aih.onControlModeChanged(
-					AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER,
+					aih_constants.CTRL_MODE_NAME.SNIPER,
 					preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
 					aimingMode=self.aimingMode,
 					saveZoom=False,
@@ -2636,7 +2636,7 @@ def new_ArcadeControlMode_handleKeyEvent(old_ArcadeControlMode_handleKeyEvent, s
 			if shortcutHandle and (not shortcutHandle.switch or shortcutHandle.pushed):
 				if not BigWorld.player().isGunLocked and not BigWorld.player().isOwnBarrelUnderWater:
 					self._aih.onControlModeChanged(
-						AvatarInputHandler.aih_constants.CTRL_MODE_NAME.SNIPER,
+						aih_constants.CTRL_MODE_NAME.SNIPER,
 						preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
 						aimingMode=self.aimingMode,
 						saveZoom=True,
@@ -2663,7 +2663,7 @@ def new_SniperControlMode_handleKeyEvent(old_SniperControlMode_handleKeyEvent, s
 			if shortcutHandle and (not shortcutHandle.switch or shortcutHandle.pushed):
 				if not BigWorld.player().isGunLocked and not BigWorld.player().isOwnBarrelUnderWater:
 					self._aih.onControlModeChanged(
-						AvatarInputHandler.aih_constants.CTRL_MODE_NAME.ARCADE,
+						aih_constants.CTRL_MODE_NAME.ARCADE,
 						preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
 						turretYaw=self.camera.aimingSystem.turretYaw,
 						gunPitch=self.camera.aimingSystem.gunPitch,
