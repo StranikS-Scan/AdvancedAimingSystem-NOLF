@@ -1834,7 +1834,7 @@ if g_config['applicationEnabled']:
 # ----------------------------- #
 @XModLib.HookUtils.methodAddExt(p_inject_ovrds, VehicleGunRotator.VehicleGunRotator, '_VehicleGunRotator__getGunMarkerPosition')
 def new_VehicleGunRotator_getGunMarkerPosition(self, shotPoint, shotVector, dispersionAngles):
-	aimCorrection = getattr(self._VehicleGunRotator__avatar.inputHandler.ctrl, 'XAimCorrection', None)
+	aimCorrection = getattr(self._avatar.inputHandler.ctrl, 'XAimCorrection', None)
 	def colliderCorrection(collisionTestStart, collisionTestStop):
 		if aimCorrection is not None:
 			result = aimCorrection.getGunMarkerCollisionPoint(collisionTestStart, collisionTestStop)
@@ -1843,10 +1843,10 @@ def new_VehicleGunRotator_getGunMarkerPosition(self, shotPoint, shotVector, disp
 	def colliderMaterial(collisionTestStart, collisionTestStop):
 		return ProjectileMover.collideDynamicAndStatic(collisionTestStart, collisionTestStop, (self.getAttachedVehicleID(), ))
 	def colliderSpace(collisionTestStart, collisionTestStop):
-		_, result = self._VehicleGunRotator__avatar.arena.collideWithSpaceBB(collisionTestStart, collisionTestStop)
+		_, result = self._avatar.arena.collideWithSpaceBB(collisionTestStart, collisionTestStop)
 		return (result, ) if result is not None else None
 	colliders = (colliderCorrection, colliderMaterial, colliderSpace)
-	vehicleTypeDescriptor = self._VehicleGunRotator__avatar.getVehicleDescriptor()
+	vehicleTypeDescriptor = self._avatar.getVehicleDescriptor()
 	shotGravity = Math.Vector3(0.0, -1.0, 0.0).scale(vehicleTypeDescriptor.shot.gravity)
 	shotMaxDistance = vehicleTypeDescriptor.shot.maxDistance
 	hitPoint, hitVector, hitResult, hitCollider = XModLib.CollisionUtils.computeProjectileTrajectoryEnd(shotPoint, shotVector, shotGravity, colliders)
