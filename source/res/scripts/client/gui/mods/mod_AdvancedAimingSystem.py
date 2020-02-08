@@ -2550,6 +2550,7 @@ import aih_constants
 # ---------------------- #
 import AvatarInputHandler.control_modes
 import gui.Scaleform.daapi.view.battle.shared.crosshair.gm_factory
+from gui.Scaleform.genConsts.GUN_MARKER_VIEW_CONSTANTS import GUN_MARKER_VIEW_CONSTANTS as _CONSTANTS
 
 # ------------------- #
 #    X-Mod Library    #
@@ -2590,18 +2591,10 @@ if g_config['applicationEnabled'] and g_config['plugins']['sniperModeSPG']['enab
 #    ControlMarkersFactory Hooks    #
 # --------------------------------- #
 @XModLib.HookUtils.methodHookExt(p_inject_hooks, gui.Scaleform.daapi.view.battle.shared.crosshair.gm_factory._ControlMarkersFactory, '_createSPGMarkers', invoke=XModLib.HookUtils.HookInvoke.MASTER)
-def new_ControlMarkersFactory_createSPGMarkers(old_ControlMarkersFactory_createSPGMarkers, self, markersInfo, components=None):
-	result = old_ControlMarkersFactory_createSPGMarkers(self, markersInfo, components=components)
-	if markersInfo.isServerMarkerActivated:
-		dataProvider = markersInfo.serverMarkerDataProvider
-		markerType = aih_constants.GUN_MARKER_TYPE.SERVER
-	elif markersInfo.isClientMarkerActivated:
-		dataProvider = markersInfo.clientMarkerDataProvider
-		markerType = aih_constants.GUN_MARKER_TYPE.CLIENT
-	else:
-		dataProvider = None
-		markerType = aih_constants.GUN_MARKER_TYPE.UNDEFINED
-	return result + (self._createSniperMarker(markerType, dataProvider, components=components), )
+def new_ControlMarkersFactory_createSPGMarkers(old_ControlMarkersFactory_createSPGMarkers, self):
+	result = old_ControlMarkersFactory_createSPGMarkers(self)
+	markerType = self._getMarkerType()
+	return result + (self._createSniperMarker(markerType, name=_CONSTANTS.SNIPER_GUN_MARKER_NAME), )
 
 # ----------------------------- #
 #    ArcadeControlMode Hooks    #
