@@ -1,4 +1,4 @@
-__application__ = ('Advanced Aiming System Mod', 'AdvancedAimingSystem', 'GPCracker.AdvancedAimingSystem')
+__application__ = ('Advanced Aiming System Mod [NOLF]', 'AdvancedAimingSystem_NOLF', 'GPCracker.AdvancedAimingSystem.NOLF')
 __official_topic__ = 'http://www.koreanrandom.com/forum/topic/16559-/'
 __authors__ = ('GPCracker', )
 __bugfixes__ = ('Tempora', )
@@ -163,8 +163,8 @@ g_globals['appConfigReader'] = XModLib.XMLConfigReader.XMLConfigReader((
 g_globals['appDefaultConfig'] = {
 	'applicationEnabled': ('Bool', True),
 	'ignoreClientVersion': ('Bool', False),
-	'appSuccessMessage': ('LocalizedWideString', u'<a href="event:AdvancedAimingSystem.official_topic"><font color="#0080FF">"Advanced&nbsp;Aiming&nbsp;System"</font></a> <font color="#008000">was successfully loaded.</font>'),
-	'appWarningMessage': ('LocalizedWideString', u'<a href="event:AdvancedAimingSystem.official_topic"><font color="#0080FF">"Advanced&nbsp;Aiming&nbsp;System"</font></a> <font color="#E00000">was not tested with current client version.</font>'),
+	'appSuccessMessage': ('LocalizedWideString', u'<a href="event:AdvancedAimingSystem.official_topic"><font color="#0080FF">"Advanced&nbsp;Aiming&nbsp;System&nbsp;NOLF"</font></a> <font color="#008000">was successfully loaded.</font>'),
+	'appWarningMessage': ('LocalizedWideString', u'<a href="event:AdvancedAimingSystem.official_topic"><font color="#0080FF">"Advanced&nbsp;Aiming&nbsp;System&nbsp;NOLF"</font></a> <font color="#E00000">was not tested with current client version.</font>'),
 	'modules': {
 		'aimingInfo': {
 			'enabled': ('Bool', True),
@@ -1243,6 +1243,16 @@ class GuiBaseBusinessHandler(gui.Scaleform.framework.package_layout.PackageBusin
 	def _updatePanelConfig(alias, config):
 		gui.shared.g_eventBus.handleEvent(GuiEvent(GuiEvent.INFO_PANEL_CONFIG, {'alias': alias, 'config': config}), gui.shared.EVENT_BUS_SCOPE.BATTLE)
 		return
+	
+	def init(self):
+		for eventType, listener in self._listeners:
+			gui.shared.g_eventBus.addListener(eventType, listener, self._scope)
+
+	def fini(self):
+		self._app = None
+		for eventType, listener in self._listeners:
+			gui.shared.g_eventBus.removeListener(eventType, listener, self._scope)
+		self._listeners = ()	
 
 class GuiBattleBusinessHandler(GuiBaseBusinessHandler):
 	def __init__(self, staticConfigs, ingameConfigs):
@@ -1301,7 +1311,7 @@ class GuiBattleBusinessHandler(GuiBaseBusinessHandler):
 		ctrlMode = event.ctx['ctrlMode']
 		if ctrlMode == aih_constants.CTRL_MODE_NAME.ARCADE:
 			ctrlModeName = 'arcade'
-		elif ctrlMode == aih_constants.CTRL_MODE_NAME.SNIPER:
+		elif ctrlMode == aih_constants.CTRL_MODE_NAME.SNIPER or ctrlMode == aih_constants.CTRL_MODE_NAME.DUAL_GUN:
 			ctrlModeName = 'sniper'
 		elif ctrlMode == aih_constants.CTRL_MODE_NAME.STRATEGIC:
 			ctrlModeName = 'strategic'

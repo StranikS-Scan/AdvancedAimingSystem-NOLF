@@ -161,6 +161,16 @@ class GuiBaseBusinessHandler(gui.Scaleform.framework.package_layout.PackageBusin
 	def _updatePanelConfig(alias, config):
 		gui.shared.g_eventBus.handleEvent(GuiEvent(GuiEvent.INFO_PANEL_CONFIG, {'alias': alias, 'config': config}), gui.shared.EVENT_BUS_SCOPE.BATTLE)
 		return
+	
+	def init(self):
+		for eventType, listener in self._listeners:
+			gui.shared.g_eventBus.addListener(eventType, listener, self._scope)
+
+	def fini(self):
+		self._app = None
+		for eventType, listener in self._listeners:
+			gui.shared.g_eventBus.removeListener(eventType, listener, self._scope)
+		self._listeners = ()	
 
 class GuiBattleBusinessHandler(GuiBaseBusinessHandler):
 	def __init__(self, staticConfigs, ingameConfigs):
@@ -219,7 +229,7 @@ class GuiBattleBusinessHandler(GuiBaseBusinessHandler):
 		ctrlMode = event.ctx['ctrlMode']
 		if ctrlMode == aih_constants.CTRL_MODE_NAME.ARCADE:
 			ctrlModeName = 'arcade'
-		elif ctrlMode == aih_constants.CTRL_MODE_NAME.SNIPER:
+		elif ctrlMode == aih_constants.CTRL_MODE_NAME.SNIPER or ctrlMode == aih_constants.CTRL_MODE_NAME.DUAL_GUN:
 			ctrlModeName = 'sniper'
 		elif ctrlMode == aih_constants.CTRL_MODE_NAME.STRATEGIC:
 			ctrlModeName = 'strategic'

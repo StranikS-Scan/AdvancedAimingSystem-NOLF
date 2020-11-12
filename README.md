@@ -6,9 +6,9 @@
 
 ## Сборка (для мододелов)
 1. Вносим правки в скрипты **XModLib**-библиотеки в папке ["common"](./source/res/scripts/common)
-2. Затем компилируем папку через **[PjOrion](https://koreanrandom.com/forum/topic/15280-)**
+2. Затем компилируем папку через **[PjOrion](https://koreanrandom.com/forum/topic/15280-)** (Run - Compile py-folder...)
 3. Вносим правки в скрипты **AAS**-мода в системной папке [".submodules"](./source/res/scripts/client/gui/mods/.submodules)
-4. Собираем итоговый **mod_**-файл, открыв в **PjOrion** скрипт [".assembler.py"](./source/res/scripts/client/gui/mods/.submodules/.assembler.py) и запустив его через **F5**
+4. Собираем итоговый **mod_**-файл: открываем в **PjOrion** скрипт [".assembler.py"](./source/res/scripts/client/gui/mods/.submodules/.assembler.py) и выполняем его через **F5**
 5. Компилируем итоговый файл мода ["mod_AdvancedAimingSystem.py"](./source/res/scripts/client/gui/mods/mod_AdvancedAimingSystem.py) в **PjOrion**
 6. Вписываем новую версию пакета в файле ["meta.xml"](./source/meta.xml) и собираем новый пакет, запустив **"Zip-Packer.cmd"**. (требуется наличие в системе архиватора **7-Zip**). Пакет будет сохранён в папку ["\\zip"](./zip)
 

@@ -39,8 +39,8 @@ g_globals['appConfigReader'] = XModLib.XMLConfigReader.XMLConfigReader((
 g_globals['appDefaultConfig'] = {
 	'applicationEnabled': ('Bool', True),
 	'ignoreClientVersion': ('Bool', False),
-	'appSuccessMessage': ('LocalizedWideString', u'<a href="event:AdvancedAimingSystem.official_topic"><font color="#0080FF">"Advanced&nbsp;Aiming&nbsp;System"</font></a> <font color="#008000">was successfully loaded.</font>'),
-	'appWarningMessage': ('LocalizedWideString', u'<a href="event:AdvancedAimingSystem.official_topic"><font color="#0080FF">"Advanced&nbsp;Aiming&nbsp;System"</font></a> <font color="#E00000">was not tested with current client version.</font>'),
+	'appSuccessMessage': ('LocalizedWideString', u'<a href="event:AdvancedAimingSystem.official_topic"><font color="#0080FF">"Advanced&nbsp;Aiming&nbsp;System&nbsp;NOLF"</font></a> <font color="#008000">was successfully loaded.</font>'),
+	'appWarningMessage': ('LocalizedWideString', u'<a href="event:AdvancedAimingSystem.official_topic"><font color="#0080FF">"Advanced&nbsp;Aiming&nbsp;System&nbsp;NOLF"</font></a> <font color="#E00000">was not tested with current client version.</font>'),
 	'modules': {
 		'aimingInfo': {
 			'enabled': ('Bool', True),

@@ -17,7 +17,7 @@ import constants
 import gui.SystemMessages
 import gui.shared.notifications
 import gui.shared.personality
-import gui.Scaleform.framework.ViewTypes
+from frameworks.wulf import WindowLayer 
 import gui.Scaleform.daapi.view.battle.shared.messages.fading_messages
 import notification.settings
 import notification.NotificationMVC
@@ -48,7 +48,7 @@ def getBattleChatControllers():
 def showMessageOnPanel(msgType, msgKey, msgText, msgColor):
 	battleApp = gui.shared.personality.ServicesLocator.appLoader.getDefBattleApp()
 	if battleApp is not None and msgType in ['Vehicle', 'VehicleError', 'Player']:
-		battlePage = battleApp.containerManager.getContainer(gui.Scaleform.framework.ViewTypes.VIEW).getView()
+		battlePage = battleApp.containerManager.getContainer(WindowLayer.VIEW).getView()
 		messageMethods = gui.Scaleform.daapi.view.battle.shared.messages.fading_messages._COLOR_TO_METHOD
 		if msgColor in messageMethods:
 			getattr(battlePage.components['battle' + msgType + 'Messages'], messageMethods[msgColor])(msgKey, msgText)
