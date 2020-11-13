@@ -75,7 +75,7 @@ def new_ArcadeControlMode_activateAlternateMode(self, pos=None, bByScroll=False)
 				self._aih.onControlModeChanged(
 					aih_constants.CTRL_MODE_NAME.SNIPER,
 					preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
-					aimingMode=self.aimingMode,
+					aimingMode=self._aimingMode,
 					saveZoom=False,
 					equipmentID=None
 				)
@@ -99,7 +99,7 @@ def new_ArcadeControlMode_handleKeyEvent(old_ArcadeControlMode_handleKeyEvent, s
 					self._aih.onControlModeChanged(
 						aih_constants.CTRL_MODE_NAME.SNIPER,
 						preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
-						aimingMode=self.aimingMode,
+						aimingMode=self._aimingMode,
 						saveZoom=True,
 						equipmentID=None
 					)
@@ -128,7 +128,7 @@ def new_SniperControlMode_handleKeyEvent(old_SniperControlMode_handleKeyEvent, s
 						preferredPos=self.camera.aimingSystem.getDesiredShotPoint(),
 						turretYaw=self.camera.aimingSystem.turretYaw,
 						gunPitch=self.camera.aimingSystem.gunPitch,
-						aimingMode=self.aimingMode,
+						aimingMode=self._aimingMode,
 						closesDist=False
 					)
 	return result
