@@ -2449,7 +2449,7 @@ def new_ArtyCamera_init(self, *args, **kwargs):
 	config = g_config['plugins']['advancedArty']
 	if config['enabled']:
 		if config['cameraAdjustment']['enabled']:
-			self._ArtyCamera__cfg['interpolationSpeed'] = config['cameraAdjustment']['interpolationSpeed']
+			self._cfg['interpolationSpeed'] = config['cameraAdjustment']['interpolationSpeed']
 		if config['orthogonalView']['enabled']:
 			self._ArtyCamera__strategicAreaViewScaleMatrix = XModLib.MathUtils.getIdentityMatrix()
 	return
